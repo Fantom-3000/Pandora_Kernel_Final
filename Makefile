@@ -1,6 +1,6 @@
 VERSION = 3
 PATCHLEVEL = 10
-SUBLEVEL = 50
+SUBLEVEL = 51
 EXTRAVERSION =
 NAME = TOSSUG Baby Fish
 
@@ -388,6 +388,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Wno-bool-compare \
 		   -Wno-array-bounds \
            -Wno-unused-function \
+           -Wno-unused-variable \
 		   $(KERNEL_FLAGS)
 
 KBUILD_AFLAGS_KERNEL :=
@@ -648,6 +649,8 @@ ifndef CONFIG_FUNCTION_TRACER
 KBUILD_CFLAGS	+= -fomit-frame-pointer
 endif
 endif
+
+KBUILD_CFLAGS   += $(call cc-option, -fno-var-tracking-assignments)
 
 ifdef CONFIG_DEBUG_INFO
 KBUILD_CFLAGS	+= -g
